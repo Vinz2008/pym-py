@@ -1,0 +1,11 @@
+#!/usr/bin/python3
+import sys
+'''if sys.argv[0].startswith("./") or sys.argv[0].startswith("/"):
+	isPythonCli = False
+else:
+	isPythonCli = True
+'''
+for i in range(1,len(sys.argv):
+	print(sys.argv[i])
+
+print(sys.argv)
