@@ -1,11 +1,45 @@
 #!/usr/bin/python3
 import sys
-'''if sys.argv[0].startswith("./") or sys.argv[0].startswith("/"):
-	isPythonCli = False
-else:
-	isPythonCli = True
-'''
-for i in range(1,len(sys.argv):
+IsDebugMode = False
+OutputFileNameOption = False
+FileOutput = "out.py"
+fileInput = ""
+for i in range(1, len(sys.argv)):
 	print(sys.argv[i])
+	if sys.argv[i] == "-d":
+		IsDebugMode = True
+	elif sys.argv[i] =="-o":
+		OutputFileNameOption = True
+		FileOutput = sys.argv[i + 1]
+		i += 1
+	else:
+		if fileInput == "":
+			fileInput = sys.argv[i]
 
-print(sys.argv)
+if IsDebugMode == True:
+	print(fileInput)
+	print(sys.argv)
+
+input = open(fileInput, "r")
+output = open(FileOutput, "w")
+linesInput = input.readlines()
+for line in linesInput:
+	if line.startswith("#m") or line.startswith("#macro"):
+		if line.startswith("#m"):
+			endMacroStartPos = 3; 
+		if line.startswith("#macro"):
+			endMacroStartPos = 7; 
+		instruction = line[endMacroStartPos:len(line)]
+		if instruction.startswith("echo"):
+			posAfterEcho = endMacroStartPos + 5
+			stringToPrint = line[posAfterEcho:len(line) - 1]
+			if IsDebugMode == True:
+				print("instruction : " + instruction)
+				print("stringToPrint : " + stringToPrint)
+			output.write("print('" + stringToPrint + "')" + "\n")
+	else:
+		output.write(line + "\n")
+
+input.close()
+output.close()
+

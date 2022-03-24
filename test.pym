@@ -1,0 +1,3 @@
+#macro echo macro
+#m echo macro
+print("hello")
