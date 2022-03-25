@@ -1,3 +1,5 @@
 #macro echo macro
 #m echo macro
+#macro define HELLO world
 print("hello")
+print("HELLO")
