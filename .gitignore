@@ -2,3 +2,4 @@ out.py
 build/
 dist/
 pym_macro.egg-info/
+pym.egg-info/
